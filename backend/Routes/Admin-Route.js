@@ -1,13 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const cors = require('cors')
 
-const mongoURI = 'mongodb+srv://saralbjr1:saral123@cluster0.yvg1dbw.mongodb.net/DrinkMandu?retryWrites=true&w=majority';
-const dbName = 'DrinkMandu';
-const collectionName = 'Drink_Items';
-const categoryCollection = 'Drink_Category';
+
+const mongoURI = process.env.MONGO_URI;
+const dbName = 'Pasal';
+const collectionName = 'Items';
+const categoryCollection = 'Item_Category';
 
 router.use(cors())
 

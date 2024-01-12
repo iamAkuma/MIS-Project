@@ -1,6 +1,8 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose')
 // const mongoDbClient = require("mongodb").MongoClient
-const mongoURI = "mongodb+srv://saralbjr1:saral123@cluster0.yvg1dbw.mongodb.net/DrinkMandu?retryWrites=true&w=majority" // Customer change url to your db you created in atlas
+const mongoURI = process.env.MONGO_URI;
 // mongodb://<username>:<password>@merncluster-shard-00-00.d1d4z.mongodb.net:27017,merncluster-shard-00-01.d1d4z.mongodb.net:27017,merncluster-shard-00-02.d1d4z.mongodb.net:27017/?ssl=true&replicaSet=atlas-eusy5p-shard-0&authSource=admin&retryWrites=true&w=majority
 module.exports = function (callback) {
     mongoose.connect(mongoURI, { useNewUrlParser: true }, async (err, result) => {
@@ -9,9 +11,9 @@ module.exports = function (callback) {
         else {
             // var database =
             console.log("Connected to MongoDB")
-            const foodCollection = await mongoose.connection.db.collection("Drink_Items");
+            const foodCollection = await mongoose.connection.db.collection("Items");
             foodCollection.find({}).toArray(async function (err, data) {
-                const categoryCollection = await mongoose.connection.db.collection("Drink_Category");
+                const categoryCollection = await mongoose.connection.db.collection("Item_Category");
                 categoryCollection.find({}).toArray(async function (err, Catdata) {
                     callback(err, data, Catdata);
 
